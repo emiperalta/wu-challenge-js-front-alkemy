@@ -7,8 +7,12 @@ export default function Header() {
     <>
       <div className='header'>
         <nav>
-          <Link to='/'>Home</Link>
-          <Link to='/create'>Create new post</Link>
+          <Link to='/'>
+            <h2>Home</h2>
+          </Link>
+          <Link to='/create'>
+            <h2>Create new post</h2>
+          </Link>
         </nav>
       </div>
     </>
