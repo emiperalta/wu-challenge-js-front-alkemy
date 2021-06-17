@@ -1,22 +1,14 @@
-import { useEffect, useState } from 'react';
-
-import { deleteOne, getAll } from 'services/postApi';
+import usePosts from 'hooks/usePosts';
 
 import Post from 'components/Post';
 
 import './styles.css';
 
 export default function Home() {
-  const [posts, setPosts] = useState([]);
-
-  useEffect(() => {
-    getAll().then(data => setPosts(data));
-  }, []);
+  const { deleteOnePost, posts } = usePosts();
 
   const handleDelete = postId => {
-    deleteOne(postId).then(() => {
-      setPosts([...posts.filter(p => p.id !== postId)]);
-    });
+    deleteOnePost(postId);
   };
 
   return (

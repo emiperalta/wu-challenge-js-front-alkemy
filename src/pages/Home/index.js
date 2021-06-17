@@ -9,6 +9,7 @@ export default function Home() {
         <title>Home | WarmUp Challenge JS</title>
         <meta name='description' content='homepage' />
       </Helmet>
+
       <PostList />
     </>
   );

@@ -1,5 +1,7 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
+import { PostContextProvider } from 'context/PostContext';
+
 import Header from 'components/Header';
 
 import CreateForm from 'pages/CreateForm';
@@ -13,12 +15,14 @@ export default function App() {
       <div>
         <Header />
       </div>
-      <Switch>
-        <Route exact path='/' component={Home} />
-        <Route path='/create' component={CreateForm} />
-        <Route exact path='/:id' component={Details} />
-        <Route path='/edit/:id' component={EditForm} />
-      </Switch>
+      <PostContextProvider>
+        <Switch>
+          <Route exact path='/' component={Home} />
+          <Route path='/create' component={CreateForm} />
+          <Route exact path='/:id' component={Details} />
+          <Route path='/edit/:id' component={EditForm} />
+        </Switch>
+      </PostContextProvider>
     </Router>
   );
 }

@@ -4,6 +4,7 @@ import PostDetails from 'components/PostDetails';
 
 export default function Details(props) {
   const { id } = props.match.params;
+
   return (
     <>
       <Helmet>

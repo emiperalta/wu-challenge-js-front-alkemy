@@ -11,6 +11,16 @@ const getOneById = id => {
   });
 };
 
+const addOne = ({ title, body }) => {
+  return fetch(baseUrl, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
+    body: JSON.stringify({ title, body }),
+  }).then(res => res.json());
+};
+
 const deleteOne = id => {
   return fetch(`${baseUrl}/${id}`, {
     method: 'DELETE',
@@ -20,4 +30,4 @@ const deleteOne = id => {
   });
 };
 
-export { deleteOne, getAll, getOneById };
+export { addOne, deleteOne, getAll, getOneById };

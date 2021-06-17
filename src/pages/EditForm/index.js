@@ -1,6 +1,8 @@
 import { Helmet } from 'react-helmet';
 
-export default function EditForm() {
+export default function EditForm(props) {
+  const { id } = props.match.params;
+
   return (
     <>
       <Helmet>
