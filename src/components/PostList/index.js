@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { getAll } from 'services/postApi';
+import { deleteOne, getAll } from 'services/postApi';
 
 import Post from 'components/Post';
 
@@ -13,11 +13,17 @@ export default function Home() {
     getAll().then(data => setPosts(data));
   }, []);
 
+  const handleDelete = postId => {
+    deleteOne(postId).then(() => {
+      setPosts([...posts.filter(p => p.id !== postId)]);
+    });
+  };
+
   return (
     <>
       <div className='list'>
         {posts.map(post => (
-          <Post key={post.id} post={post} />
+          <Post handleDelete={handleDelete} key={post.id} post={post} />
         ))}
       </div>
     </>

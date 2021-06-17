@@ -11,4 +11,13 @@ const getOneById = id => {
   });
 };
 
-export { getAll, getOneById };
+const deleteOne = id => {
+  return fetch(`${baseUrl}/${id}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+};
+
+export { deleteOne, getAll, getOneById };

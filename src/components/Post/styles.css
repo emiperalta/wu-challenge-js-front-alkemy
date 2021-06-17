@@ -1,0 +1,9 @@
+.postItem {
+  align-items: center;
+  display: flex;
+  justify-content: flex-start;
+}
+
+button {
+  margin-left: 10px;
+}

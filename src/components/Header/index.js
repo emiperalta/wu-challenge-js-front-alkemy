@@ -8,10 +8,10 @@ export default function Header() {
       <div className='header'>
         <nav>
           <Link to='/'>
-            <h2>Home</h2>
+            <h3>Home</h3>
           </Link>
           <Link to='/create'>
-            <h2>Create new post</h2>
+            <h3>Create post</h3>
           </Link>
         </nav>
       </div>
