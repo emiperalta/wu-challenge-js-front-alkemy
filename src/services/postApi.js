@@ -11,13 +11,23 @@ const getOneById = id => {
   });
 };
 
-const addOne = ({ title, body }) => {
+const addOne = ({ body, title }) => {
   return fetch(baseUrl, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json; charset=UTF-8',
+      'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ title, body }),
+    body: JSON.stringify({ body, title }),
+  }).then(res => res.json());
+};
+
+const updateOne = (id, { body, title }) => {
+  return fetch(`${baseUrl}/${id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ body, title }),
   }).then(res => res.json());
 };
 
@@ -30,4 +40,4 @@ const deleteOne = id => {
   });
 };
 
-export { addOne, deleteOne, getAll, getOneById };
+export { addOne, deleteOne, getAll, getOneById, updateOne };

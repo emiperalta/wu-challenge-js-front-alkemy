@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 
 import PostContext from 'context/PostContext';
 
@@ -7,30 +7,34 @@ import * as postService from 'services/postApi';
 const usePosts = () => {
   const { posts, setPosts } = useContext(PostContext);
 
-  useEffect(() => {
-    postService
-      .getAll()
-      .then(data => setPosts(data))
-      .catch(err => console.error(err));
-  }, [setPosts]);
-
-  const addNewPost = ({ title, body }) => {
+  const addNewPost = ({ body, title }) => {
     return postService
-      .addOne({ title, body })
+      .addOne({ body, title })
       .then(newPost => setPosts([...posts, newPost]))
+      .catch(err => console.error(err));
+  };
+
+  const updateOnePost = (id, { body, title }) => {
+    return postService
+      .updateOne(id, { body, title })
+      .then(res => setPosts([...posts.map(p => (p.id === Number(id) ? res : p))]))
       .catch(err => console.error(err));
   };
 
   const deleteOnePost = postId => {
     return postService
       .deleteOne(postId)
-      .then(() => {
-        setPosts([...posts.filter(p => p.id !== postId)]);
-      })
+      .then(() => setPosts([...posts.filter(p => p.id !== postId)]))
       .catch(err => console.error(err));
   };
 
-  return { addNewPost, deleteOnePost, posts, setPosts };
+  return {
+    addNewPost,
+    deleteOnePost,
+    posts,
+    setPosts,
+    updateOnePost,
+  };
 };
 
 export default usePosts;

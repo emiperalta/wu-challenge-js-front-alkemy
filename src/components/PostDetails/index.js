@@ -1,16 +1,7 @@
-import { useEffect, useState } from 'react';
-
-import { getOneById } from 'services/postApi';
+import useSinglePost from 'hooks/useSinglePost';
 
 export default function PostDetails({ postId }) {
-  const [post, setPost] = useState({});
-  const [error, setError] = useState('');
-
-  useEffect(() => {
-    getOneById(postId)
-      .then(res => setPost(res))
-      .catch(err => setError('' + err));
-  }, [postId]);
+  const { error, post } = useSinglePost(postId);
 
   if (error) {
     return <h5 style={{ color: 'red' }}>{error}</h5>;
