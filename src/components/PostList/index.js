@@ -13,6 +13,7 @@ export default function Home() {
 
   return (
     <>
+      <h2 className='title'>Posts</h2>
       <div className='list'>
         {posts.map(post => (
           <Post handleDelete={handleDelete} key={post.id} post={post} />

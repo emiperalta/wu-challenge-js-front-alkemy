@@ -6,13 +6,17 @@ export default function Post({ handleDelete, post }) {
   return (
     <div className='postItem'>
       <p>{post.title}</p>
-      <button>
-        <Link to={`/${post.id}`}>details</Link>
-      </button>
-      <button>
-        <Link to={`/edit/${post.id}`}>Edit</Link>
-      </button>
-      <button onClick={() => handleDelete(post.id)}>Delete</button>
+      <section className='links'>
+        <button>
+          <Link to={`/${post.id}`}>Details</Link>
+        </button>
+        <div className='actions'>
+          <button>
+            <Link to={`/edit/${post.id}`}>Edit</Link>
+          </button>
+          <button onClick={() => handleDelete(post.id)}>Delete</button>
+        </div>
+      </section>
     </div>
   );
 }

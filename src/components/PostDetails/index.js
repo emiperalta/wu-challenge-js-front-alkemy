@@ -1,16 +1,20 @@
-import useSinglePost from 'hooks/useSinglePost';
+import usePosts from 'hooks/usePosts';
+
+import './styles.css';
 
 export default function PostDetails({ postId }) {
-  const { error, post } = useSinglePost(postId);
+  const { posts } = usePosts();
 
-  if (error) {
-    return <h5 style={{ color: 'red' }}>{error}</h5>;
+  const postExits = postId ? posts.find(p => p.id === Number(postId)) : null;
+
+  if (!postExits) {
+    return <h5 className='error'>Post not found</h5>;
   }
 
   return (
-    <div>
-      <h3>{post.title}</h3>
-      <p>{post.body}</p>
+    <div className='postDetails'>
+      <h3>{postExits.title}</h3>
+      <p>{postExits.body}</p>
     </div>
   );
 }

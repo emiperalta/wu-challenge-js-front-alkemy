@@ -1,0 +1,16 @@
+.error {
+  font-size: 2rem;
+  text-align: center;
+  color: red;
+}
+
+.postDetails {
+  text-align: center;
+  padding-top: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.postDetails h3 {
+  font-size: 2rem;
+}

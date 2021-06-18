@@ -3,6 +3,8 @@ import { useHistory } from 'react-router';
 
 import usePosts from 'hooks/usePosts';
 
+import './styles.css';
+
 export default function PostForm({ postId }) {
   const { addNewPost, posts, updateOnePost } = usePosts();
 
@@ -22,6 +24,8 @@ export default function PostForm({ postId }) {
 
   const handleSubmit = e => {
     e.preventDefault();
+    console.log(postId);
+    console.log(typeof postId);
     postId ? updateOnePost(postId, { body, title }) : addNewPost({ body, title });
     setTitle('');
     setBody('');
@@ -32,28 +36,31 @@ export default function PostForm({ postId }) {
   const handleBodyChange = e => setBody(e.target.value);
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Title</label>
-          <input
-            name='title'
-            onChange={handleTitleChange}
-            type='text'
-            value={title}
-          />
-        </div>
-        <div>
-          <label>Body</label>
-          <input
-            name='content'
-            onChange={handleBodyChange}
-            type='textarea'
-            value={body}
-          />
-        </div>
-        <button type='submit'>Add</button>
-      </form>
-    </div>
+    <>
+      <h2 className='title'>{postToEdit ? 'Update post' : 'Create post'}</h2>
+      <div className='formContainer'>
+        <form className='form' onSubmit={handleSubmit}>
+          <div className='form-group'>
+            <label>Title</label>
+            <input
+              name='title'
+              onChange={handleTitleChange}
+              type='text'
+              value={title}
+            />
+          </div>
+          <div className='form-group'>
+            <label>Body</label>
+            <textarea
+              name='content'
+              onChange={handleBodyChange}
+              type='textarea'
+              value={body}
+            />
+          </div>
+          <button type='submit'>{postToEdit ? 'Update' : 'Add'}</button>
+        </form>
+      </div>
+    </>
   );
 }
