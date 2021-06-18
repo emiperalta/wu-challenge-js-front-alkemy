@@ -17,7 +17,12 @@
 }
 
 .header a:hover {
-  color: red;
+  color: rgb(201, 21, 21);
+  text-decoration: underline;
+}
+
+.header a:active {
+  color: rgb(225, 70, 70);
 }
 
 .header h3 {

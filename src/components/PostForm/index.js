@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
+import { GrAdd, GrUpdate } from 'react-icons/gr';
 
 import usePosts from 'hooks/usePosts';
 
@@ -10,6 +11,8 @@ export default function PostForm({ postId }) {
 
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
+  const [titleError, setTitleError] = useState('');
+  const [bodyError, setBodyError] = useState('');
 
   const history = useHistory();
 
@@ -24,12 +27,16 @@ export default function PostForm({ postId }) {
 
   const handleSubmit = e => {
     e.preventDefault();
-    console.log(postId);
-    console.log(typeof postId);
-    postId ? updateOnePost(postId, { body, title }) : addNewPost({ body, title });
-    setTitle('');
-    setBody('');
-    history.push('/');
+
+    !body ? setBodyError('Post content must not be empty') : setBodyError('');
+    !title ? setTitleError('Post title must not be empty') : setTitleError('');
+
+    if (body && title) {
+      postId ? updateOnePost(postId, { body, title }) : addNewPost({ body, title });
+      setTitle('');
+      setBody('');
+      history.push('/');
+    }
   };
 
   const handleTitleChange = e => setTitle(e.target.value);
@@ -48,6 +55,9 @@ export default function PostForm({ postId }) {
               type='text'
               value={title}
             />
+            {titleError && (
+              <span style={{ color: 'red', paddingTop: '5px' }}>{titleError}</span>
+            )}
           </div>
           <div className='form-group'>
             <label>Body</label>
@@ -57,8 +67,23 @@ export default function PostForm({ postId }) {
               type='textarea'
               value={body}
             />
+            {bodyError && (
+              <span style={{ color: 'red', paddingTop: '5px' }}>{bodyError}</span>
+            )}
           </div>
-          <button type='submit'>{postToEdit ? 'Update' : 'Add'}</button>
+          <button type='submit'>
+            {postToEdit ? (
+              <>
+                <GrUpdate />
+                Update
+              </>
+            ) : (
+              <>
+                <GrAdd />
+                Add
+              </>
+            )}
+          </button>
         </form>
       </div>
     </>
